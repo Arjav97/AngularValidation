@@ -1,0 +1,71 @@
+<div>
+  
+  <form #f="ngForm" (ngSubmit)="submit(f.value)"> 
+  
+  <label><b>Username :</b> </label><br>
+  
+  <input type="text" placeholder="Enter username" name="username" ngModel #username="ngModel" pattern="[a-zA-Z]*" minlength="4" required style="border:1px solid" ><br>
+  <!--
+  This is another method of displaying validation both would work
+  <small *ngIf="username.dirty && username.errors?.required">  
+  Username is required!
+  </small>
+  <small *ngIf="username.dirty && username.errors?.minlength">
+    username must have minlength of 3
+  </small>
+  <small *ngIf="username.dirty && username.errors?.pattern">
+    Username cannot be digit
+  </small>
+-->
+  <small *ngIf="username.invalid && (username.dirty || username.touched)">
+    <small *ngIf="username.errors.required">
+      Username is required!
+    </small>
+    <small *ngIf="username.errors.minlength">
+      username must have minlength of 3
+    </small>
+    <small *ngIf="username.errors.pattern">
+      Username cannot be digit
+    </small>
+
+  </small>
+  <br><br>
+  
+  <label><b>Password :</b> </label><br>
+  
+  <input type="password" placeholder="Enter password" name="password" [(ngModel)]="pass" #password="ngModel" required minlength="6" style="border:1px solid"  >
+<!--
+  This is another method of displaying validation message
+  <small *ngIf="password.dirty && password.errors?.required">  
+    Password is required!
+    </small>
+    <small *ngIf="password.dirty && password.errors?.minlength">
+      password must have minlength of 6
+    </small>
+    <small *ngIf="password.dirty && pass?.length > 10">
+      password must be of length 10 or less!
+    </small>
+  -->
+  <small *ngIf="password.invalid && (password.dirty || password.touched)">
+    <small *ngIf="password.errors.required">  
+      Password is required!
+      </small>
+      <small *ngIf="password.errors.minlength">
+        password must have minlength of 6
+      </small>
+    </small>
+      <small *ngIf="password.dirty && pass?.length > 10">
+        password must be of length 10 or less!
+      </small>
+
+  
+
+    <br><br>
+
+    <button style="margin-left:50px;background-color:lightgrey;color:black"   [disabled]="!username.valid || !password.valid || pass?.length>10" type="submit">Submit</button><br>
+
+  </form>
+  <br><b>Form values</b><br><br>
+  Username : {{f.value.username}}<br><br>
+  Password : {{f.value.password}}
+</div>

@@ -1,0 +1,81 @@
+
+<form [formGroup]="profile" (ngSubmit)="submit()" > 
+
+  <label><b>Firstname</b></label><br>
+  <input type="text" formControlName="firstname" style="border: 1px solid black;"><br>
+  <small *ngIf="firstname.invalid && firstname.dirty ">
+    <small *ngIf="firstname.errors?.required">
+      It is required!
+    </small>
+    <small *ngIf="firstname.errors?.pattern">
+      It should be alphabet!
+    </small>
+  </small><br>
+
+  <label><b>Lastname</b></label><br>
+  <input type="text" formControlName="lastname" style="border: 1px solid black;"><br>
+  <small *ngIf="lastname.invalid && lastname.dirty ">
+    <small *ngIf="lastname.errors?.required">
+      It is required!
+    </small>
+    <small *ngIf="lastname.errors?.pattern">
+      It should be alphabet!
+    </small>
+  </small><br>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <label><b>Street</b></label><br>
+    <input type="text" formControlName="street" style="border:1px solid black;"><br>
+      <small *ngIf=" street.invalid && street.dirty && street.errors?.required ">
+        It is required!
+      </small>
+    <br>
+
+    <label><b>City</b></label><br>
+    <input type="text" formControlName="city" style="border:1px solid black;"><br>
+    <small *ngIf="city.invalid && city.dirty">
+      <small *ngIf="city.errors?.required ">
+        It is required!
+      </small>
+      <small *ngIf="city.errors?.pattern ">
+        It should be alphabet!
+      </small>
+    </small><br>
+    
+    <label><b>State</b></label><br>
+    <input type="text" formControlName="state" style="border:1px solid black;"><br>
+    <small *ngIf="state.invalid && state.dirty">
+      <small *ngIf="state.errors?.required ">
+        It is required!
+      </small>
+      <small *ngIf="state.errors?.pattern ">
+        It should be alphabet!
+      </small>
+    </small><br>
+       
+    <small *ngIf="profile.errors?.equality && state.dirty && city.dirty">
+      name of state and city identical
+    </small><br>
+ 
+    <label><b>Zip</b></label><br>
+    <input type="text" formControlName="zip" style="border:1px solid black;" maxlength="5"><br>
+    
+    <small *ngIf="zip.invalid && zip.dirty">
+
+      <small *ngIf="zip.errors?.required ">
+        It is required!
+      </small>
+      <small *ngIf="zip.errors?.minlength ">
+        Length should be 5!
+      </small>
+      <small *ngIf="zip.errors?.pattern ">
+        It should be digits!
+      </small>
+    </small>
+   
+  </div>
+
+  <button type="submit" style="margin-left: 50px;" [disabled]="!profile.valid">Submit</button>
+</form>
