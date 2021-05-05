@@ -33,7 +33,7 @@
   
   <label><b>Password :</b> </label><br>
   
-  <input type="password" placeholder="Enter password" name="password" [(ngModel)]="pass" #password="ngModel" required minlength="6" style="border:1px solid"  >
+  <input type="password" placeholder="Enter password" name="password" [(ngModel)]="pass" #password="ngModel" required appValidatePassword minlength="6" style="border:1px solid"  >
 <!--
   This is another method of displaying validation message
   <small *ngIf="password.dirty && password.errors?.required">  
@@ -49,16 +49,20 @@
   <small *ngIf="password.invalid && (password.dirty || password.touched)">
     <small *ngIf="password.errors.required">  
       Password is required!
-      </small>
-      <small *ngIf="password.errors.minlength">
-        password must have minlength of 6
-      </small>
     </small>
+    <small *ngIf="password.errors.minlength">
+        password must have minlength of 6
+    </small>
+    <small *ngIf="password.errors?.invalidPassword">
+        It should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+        letter and 1 number
+    </small>
+  </small>
+
       <small *ngIf="password.dirty && pass?.length > 10">
         password must be of length 10 or less!
       </small>
-
-  
+      
 
     <br><br>
 
